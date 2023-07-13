@@ -6,7 +6,7 @@ class Order {
         this._customerId = customerId;
         this._items = items;
         this.validate();
-        this._total = this.total();
+        this._total = this.calculateTotalPrice();
     }
     validate() {
         if (this._id.length === 0) {
@@ -20,8 +20,11 @@ class Order {
         }
         return true;
     }
-    total() {
+    calculateTotalPrice() {
         return this._items.reduce((acc, item) => acc + item.totalPrice, 0);
+    }
+    get totalPrice() {
+        return this._total;
     }
 }
 exports.default = Order;
