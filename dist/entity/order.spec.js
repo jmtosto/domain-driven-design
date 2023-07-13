@@ -28,8 +28,8 @@ describe("Order unit tests", () => {
         const order1 = new order_1.default("order-1", "customer-id", [item1]);
         const order2 = new order_1.default("order-2", "customer-id", [item1, item2]);
         const order3 = new order_1.default("order-3", "customer-id", [item1, item2, item3]);
-        expect(order1.total()).toBe(50);
-        expect(order2.total()).toBe(250);
-        expect(order3.total()).toBe(850);
+        expect(order1.totalPrice).toBe(50);
+        expect(order2.totalPrice).toBe(250);
+        expect(order3.totalPrice).toBe(850);
     });
 });

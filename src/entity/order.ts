@@ -12,7 +12,7 @@ export default class Order {
     this._customerId = customerId;
     this._items = items;
     this.validate();
-    this._total = this.total();
+    this._total = this.calculateTotalPrice();
   }
 
   validate(): boolean {
@@ -28,7 +28,11 @@ export default class Order {
     return true;
   }
 
-  total(): number {
+  calculateTotalPrice(): number {
     return this._items.reduce((acc, item) => acc + item.totalPrice, 0);
+  }
+
+  get totalPrice(): number {
+    return this._total;
   }
 }
