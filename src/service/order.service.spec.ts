@@ -1,6 +1,7 @@
 import OrderService from "./order.service";
 import Order from "../entity/order";
 import OrderItem from "../entity/order_item";
+import Customer from "../entity/customer";
 
 describe("Order Service unity tests", () => {
   it("should calculate the total price of an order list", () => {
@@ -22,4 +23,23 @@ describe("Order Service unity tests", () => {
     expect(totalPriceA).toBe(100);
     expect(totalPriceB).toBe(600);
   });
+
+  it("should place an order and assign reward points to the customer", () => {
+    const customer = new Customer("customer-1", "Customer 1");
+    
+    const item1 = new OrderItem("item-1", "product-1", "Item 1", 2, 50);
+    const item2 = new OrderItem("item-2", "product-2", "Item 2", 1, 100);
+
+    const order = OrderService.placeOrder(customer, [item1, item2]);
+
+    expect(order.totalPrice).toBe(200);
+    expect(customer.rewardPoints).toBe(20);
+  })
+
+  it("should throw error when items is empty", () => {
+    expect(() => {
+      const customer = new Customer("customer-1", "Customer 1");
+      const order = OrderService.placeOrder(customer, []);
+    }).toThrowError("There must be at least one item");
+  })
 });
