@@ -86,11 +86,11 @@ describe("Product Repository unit tests", () => {
     const productB = new Product("product-b", "Product B", 200);
     const productC = new Product("product-c", "Product C", 300);
     
-    const products = [productA, productB, productC]
+    const products = [productA, productB, productC];
 
     products.map(async product => {
       await productRepository.create(product);
-    })
+    });
     
     const foundProducts = await productRepository.findAll();
 
